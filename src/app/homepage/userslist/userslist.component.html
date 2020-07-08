@@ -1,0 +1,220 @@
+
+  <div class="col-md-12 card-body "><br>
+  
+  
+      
+    <div class=" form-inline " >
+      <div class="col-md-5 ">
+      <h2> Users </h2></div>
+      <!-- <div class="col-md-5">
+      <input class=" form-control mr-sm-2 " type="text" placeholder="Search" aria-label="Search">
+      <button style="color: white;" class="btn btn-success " type="submit">Search<span class="caret"></span></button>
+    </div> -->
+    <div class="col-md-3 " style="text-align-last: right;">
+    <button type="button" class="btn btn-success " #btnAdd (click)="openModal(template)">Add new User</button></div>
+
+
+    <div class="col-md-4 form-inline">
+    <input #searchBox class=" form-control mr-sm-2 " type="text" placeholder="Search" aria-label="Search">
+    <button  style="background-color:rgb(114, 156, 144); color:rgb(65, 8, 8); " (click)="searchUser(searchBox.value)" class="btn btn-success " type="submit">Search<span class="caret"></span></button>
+ 
+  </div>
+    </div>
+
+
+<hr>
+
+
+
+<!-- using forms  -->
+<ng-template #template>
+
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">User Details2</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+  
+   <div class="well card card-block card-header">
+<form [formGroup]="myform">
+
+      <label >First name:</label>
+      <input formControlName="fstname" type="text"   placeholder="enter your firstname"  class="form-control" 
+      [class.is-invalid]="fname.invalid && fname.touched" [class.is-valid]="fname.valid">
+    <div class="text-danger" *ngIf="!fname.valid && fname.touched"> firstname is mandatory</div>
+
+             <label >Last name:</label>
+      <input  type="text" formControlName="lstname"  placeholder="enter your lastname" class="form-control" 
+      [class.is-invalid]="lname.invalid && lname.touched" [class.is-valid]="lname.valid">
+          <div class="text-danger" *ngIf="!lname.valid && lname.touched"> lastname is mandatory</div>
+
+           <label >Username:</label>
+      <input  formControlName="usrname" type="text" placeholder="enter username"  class="form-control" 
+      [class.is-invalid]="usrnme.invalid && usrnme.touched" [class.is-valid]="usrnme.valid">
+          <div class="text-danger" *ngIf="!usrnme.valid && usrnme.touched"> username is mandatory</div>
+
+            <label >Password:</label>
+      <input   formControlName="psword" type="text"  placeholder="enter password" class="form-control" 
+      [class.is-invalid]="pwd.invalid && pwd.touched" [class.is-valid]="pwd.valid">
+          <div class="text-danger" *ngIf="!pwd.valid && pwd.touched">password length should be minimum 8 characters</div>
+
+            <label >Email:</label>
+      <input  formControlName="eml" type="text" placeholder="enter your email"  class="form-control" 
+      [class.is-invalid]="email.invalid && email.touched" [class.is-valid]="email.valid">
+          <div class="text-danger" *ngIf="!email.valid && email.touched"> enter a valid email</div>
+
+            <label >Phone:</label>
+      <input formControlName="phn"  type="text" placeholder="enter your phone" class="form-control"  
+      [class.is-invalid]="ph.invalid && ph.touched" [class.is-valid]="ph.valid">
+          <div class="text-danger" *ngIf="!ph.valid && ph.touched">  enter a valid phone number</div>
+
+            <label >Address:</label>
+      <input  formControlName="address" type="text"  placeholder="enter your address" class="form-control" 
+      [class.is-invalid]="addr.invalid && addr.touched" [class.is-valid]="addr.valid">
+          <div class="text-danger" *ngIf="!addr.valid && addr.touched">  address is mandatory</div>
+
+            <label >City:</label>
+      <input formControlName="cty"  type="text" placeholder="enter your city" class="form-control"  
+      [class.is-invalid]="city1.invalid && city1.touched" [class.is-valid]="city1.valid">
+          <div class="text-danger" *ngIf="!city1.valid && city1.touched"> city is mandatory</div>
+
+            <label >State:</label>
+      <input  formControlName="state" type="text" placeholder="enter your state" class="form-control" 
+      [class.is-invalid]="stat.invalid && stat.touched" [class.is-valid]="stat.valid">
+          <div class="text-danger" *ngIf="!stat.valid && stat.touched"> state is mandatory</div>
+
+            <label >Country:</label>
+      <input  formControlName="cntry" type="text" placeholder="enter your country" class="form-control" 
+      [class.is-invalid]="country1.invalid && country1.touched" [class.is-valid]="country1.valid" >
+          <div class="text-danger" *ngIf="!country1.valid && country1.touched"> country is mandatory</div>
+</form>
+       </div>
+<br> 
+    <!-- <div *ngIf="btnAdd.click==true">
+      <button type="button" [disabled]="myform.invalid"  class="btn btn-primary" (click)=" addUser(); modalRef.hide();">Add</button></div> -->
+    <!-- <div   *ngIf="btnUpdate.click==true">
+    <button type="button"  [disabled]="myform.invalid" class="btn btn-primary" (click)=" updateUser(); modalRef.hide();">UPDATE</button></div> -->
+ <button type="button" [disabled]="myform.invalid"  class="btn btn-primary" (click)=" addUser(); modalRef.hide();">Add</button>
+<button type="button" [disabled]="myform.invalid"  class="btn btn-primary" (click)=" updateUser(); modalRef.hide();">UPDATE</button>
+    <button type="button" class="btn btn-primary" (click)="modalRef.hide()"><span >Close</span></button>
+
+  </div> 
+</ng-template>
+
+<!--using collapse-->
+<!-- <div id="collapseManual" #collapse="bs-collapse" [collapse]="true">
+  <div class="well well-lg card card-block card-header">
+      <label >First name:</label>
+      <input   type="text" [(ngModel)]="fstname">
+            <label >Last name:</label>
+      <input   type="text" [(ngModel)]="lstname">
+            <label >Username:</label>
+      <input   type="text" [(ngModel)]="usrname">
+            <label >Password:</label>
+      <input   type="text" [(ngModel)]="psword">
+            <label >Email:</label>
+      <input   type="text" [(ngModel)]="eml">
+            <label >Phone:</label>
+      <input   type="text" [(ngModel)]="phn">
+            <label >Address:</label>
+      <input   type="text" [(ngModel)]="address">
+            <label >City:</label>
+      <input   type="text" [(ngModel)]="cty">
+            <label >State:</label>
+      <input   type="text" [(ngModel)]="state">
+            <label >Country:</label>
+      <input   type="text" [(ngModel)]="cntry">
+
+    <button type="button" class="btn btn-primary" (click)="collapse.hide(); addUser();"
+        aria-controls="collapseManual">Save
+</button>
+  </div>
+</div> -->
+
+
+
+ <!-- without using forms .Using ngModel  -->
+<!--
+       <ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">User Details</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+   <div class="well card card-block card-header">
+      <label >First name:</label>
+      <input   type="text"  [(ngModel)]="fstname">
+            <label >Last name:</label>
+      <input   type="text" [(ngModel)]="lstname">
+            <label >Username:</label>
+      <input   type="text" [(ngModel)]="usrname">
+            <label >Password:</label>
+      <input   type="text" [(ngModel)]="psword">
+            <label >Email:</label>
+      <input   type="text" [(ngModel)]="eml">
+            <label >Phone:</label>
+      <input   type="text" [(ngModel)]="phn">
+            <label >Address:</label>
+      <input   type="text" [(ngModel)]="address">
+            <label >City:</label>
+      <input   type="text" [(ngModel)]="cty">
+            <label >State:</label>
+      <input   type="text" [(ngModel)]="state">
+            <label >Country:</label>
+      <input   type="text" [(ngModel)]="cntry">
+       </div>
+<br>
+      <div *ngIf="btnAdd">
+      <button type="button"  class="btn btn-primary" (click)=" addUser(); modalRef.hide();">Add</button></div> -->
+    <!-- <div   *ngIf="btnUpdate">
+    <button type="button"  class="btn btn-primary" (click)=" updateUser(); modalRef.hide();">Save</button></div> -->
+<!-- <button type="button"  class="btn btn-primary" (click)=" updateUser(); modalRef.hide();">Save</button>
+    <button type="button" class="btn btn-primary" (click)="modalRef.hide()"><span >Close</span></button>
+  </div>
+</ng-template> -->
+ 
+    <br>
+    <div class="container">
+    <div class=" row">
+  
+  <table class="table-bordered border-collapse col-md-12 table-striped">
+    <tr>
+      <th>UserId</th>
+      <th>Firstname</th>
+      <th>Lastname</th>
+      <th>Username</th>
+      <th>Password</th>
+      <th>Role</th>
+            <th>Email</th>
+                  <th>Phone</th>
+                        <th>Address</th>
+                                          <th></th>
+                                          <th></th>
+    </tr>
+
+    <tr *ngFor ="let usr of alluser;let ind=index">
+      <td>{{usr.userId}}</td>
+      <td>{{usr.firstName}}</td>
+      <td>{{usr.lastName}}</td>
+      <td>{{usr.userName}}</td>
+      <td>{{usr.password}}</td>
+      <td>{{usr.role}}</td>
+            <td>{{usr.email}}</td>
+                  <td>{{usr.phone}}</td>
+                        <td>{{usr.address}}<br>{{usr.city}}<br>{{usr.state}}<br>{{usr.country}}</td>
+                                              <td><button type="button" class="btn-primary" #btnUpdate (click)="autoPopulate(ind,usr.userId); openModal(template); ">Update</button></td>
+
+                                                  <td><button class="btn-primary">Delete</button></td>
+    </tr>
+  </table>
+  
+  </div>
+  
+      
+    </div>
+  </div>

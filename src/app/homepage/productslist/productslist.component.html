@@ -1,0 +1,86 @@
+
+  
+    <br><br>
+<div class="row">
+  <div class="col-md-5">
+    <h2>Product List</h2></div>
+    <div class="col-md-3 " style="text-align-last: right;">
+    <button class="btn btn-success " (click)=addProduct()>Add new product</button></div>
+
+    <div class="col-md-4 form-inline">
+    <input class=" form-control mr-sm-2 " type="text" placeholder="Search" aria-label="Search">
+    <button style="background-color:rgb(114, 156, 144); color:rgb(65, 8, 8); " class="btn btn-success " type="submit">Search<span class="caret"></span></button>
+ 
+  </div>
+  </div>
+  <div class="container">
+  <br>
+  <div class="album py-5 bg-light shadow-sm">
+  
+
+  
+  <table class="table-bordered border-collapse col-md-12 table-striped">
+    <tr>
+      <th>ProductId</th>
+      <th>CategoryId</th>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Quantity in stock</th>
+       <th></th>
+    </tr>
+
+   <tr *ngFor ="let res of result;let ind=index">
+
+      <td>{{res.productId}}</td>
+      <td>{{res.categoryId}}</td>
+      <td>{{res.name}}</td>
+      <td>{{res.unitPrice}}</td>
+      <td>{{res.stockQuantity}}</td>
+  
+        <td><button type="button" class="btn-primary" (click)="collapse.show();"  aria-controls="collapseManual">View Details</button></td>
+<!-- 
+                                                  <td><button class="btn-primary">Delete</button></td> -->
+
+                                         
+<!--using collapse-->
+
+ <div   id="collapseManual" #collapse="bs-collapse" [collapse]="true">
+ <tr>
+<br>
+  <div class="well well-lg card card-block card-header">
+ 
+   <div class=" row">
+
+    <div class=" col-md-4 card shadow-sm" style="align-items: center;">
+          <br><img class="bd-placeholder-img rounded-circle" width="140" height="140" src="./assets/images/kids1.jpg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title>
+</div>
+
+  <div class="col-xl-4 order-md-1 card shadow-sm">
+    <br><h4>Details<br></h4>
+  <p>Description :  {{res.description}} </p>
+  </div> 
+  <div class="col-xl-4 order-md-2 card shadow-sm" style="align-content:space-around;">
+   <button type="button" class="close pull-right" aria-label="Close" (click)="collapse.hide()"> 
+  <span aria-hidden="true">&times;</span>
+    </button>
+    <br><button style="background-color:rgb(114, 156, 144); color:rgb(65, 8, 8); " class="btn btn-success">Edit</button><br>
+    <button  class="btn btn-danger">Delete</button>
+  </div>
+
+</div> 
+  </div>
+  </tr>
+</div> 
+
+
+    </tr>
+  </table>
+  
+
+
+
+
+</div>
+  </div>
+
+
