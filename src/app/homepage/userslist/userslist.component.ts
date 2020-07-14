@@ -63,9 +63,9 @@ openModal(template: TemplateRef<any>) {
   }
 
 addUser() {
-    this.myservice.addNewUser({ "firstname": this.myform.get('fstname').value,
-    "lastname": this.myform.get('lstname').value,
-    "username": this.myform.get('usrname').value,
+    this.myservice.addNewUser({ "firstName": this.myform.get('fstname').value,
+    "lastName": this.myform.get('lstname').value,
+    "userName": this.myform.get('usrname').value,
     "password": this.myform.get('psword').value,
     // "role": this.myform.get('role').value,
     "email": this.myform.get('eml').value,
@@ -121,9 +121,9 @@ addUser() {
 
 updateUser( )
 {this.myservice.updateUsr({ "userId":this.useridstorage,
-"firstname": this.myform.get('fstname').value,
-    "lastname": this.myform.get('lstname').value,
-     "username": this.myform.get('usrname').value,
+"firstName": this.myform.get('fstname').value,
+    "lastName": this.myform.get('lstname').value,
+     "userName": this.myform.get('usrname').value,
        "password": this.myform.get('psword').value,
     // "role": this.myform.get('role').value,
     "email": this.myform.get('eml').value,
@@ -143,6 +143,31 @@ updateUser( )
     });
 
 }
+//updateUser( )
+//{this.myservice.updateUsr({ "userId":this.useridstorage,
+//"firstname": this.myform.get('fstname').value,
+ //   "lastname": this.myform.get('lstname').value,
+   //  "username": this.myform.get('usrname').value,
+ //      "password": this.myform.get('psword').value,
+  //  // "role": this.myform.get('role').value,
+  //  "email": this.myform.get('eml').value,
+  //  "address": this.myform.get('address').value,
+  //  "city": this.myform.get('cty').value,
+  //  "state": this.myform.get('state').value,
+  //  "country":this.myform.get('cntry').value, 
+  //  "phone": this.myform.get('phn').value,
+  //  }).subscribe((result) => {
+  //       console.log(result);
+   //   // this.router.navigate(['/list']);
+
+  //  }, (err) => {
+
+    //  console.log(err);
+
+   // });
+
+//}
+
 get fname()
 {
   return this.myform.get('fstname');

@@ -1,25 +1,115 @@
-
-  
     <br><br>
 <div class="row">
   <div class="col-md-5">
     <h2>Product List</h2></div>
     <div class="col-md-3 " style="text-align-last: right;">
-    <button class="btn btn-success " (click)=addProduct()>Add new product</button></div>
+    <button class="btn btn-success " (click)="openModal(template1)">Add new product</button></div>
 
     <div class="col-md-4 form-inline">
     <input class=" form-control mr-sm-2 " type="text" placeholder="Search" aria-label="Search">
     <button style="background-color:rgb(114, 156, 144); color:rgb(65, 8, 8); " class="btn btn-success " type="submit">Search<span class="caret"></span></button>
- 
   </div>
+</div>
+
+
+<!-- using forms  -->
+<ng-template #template1>
+
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Product Details</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
   </div>
+  <div class="modal-body">
+  
+   <div class="well card card-block card-header">
+<form [formGroup]="myform1">
+
+      <label >Name:</label>
+      <input formControlName="name" type="text"   placeholder="name of product"  class="form-control" 
+      [class.is-invalid]="name1.invalid && name1.touched" [class.is-valid]="name1.valid">
+    <div class="text-danger" *ngIf="!name1.valid && name1.touched"> name is mandatory</div>
+
+             <label >Product Id</label>
+      <input  type="text" formControlName="prId"  placeholder="enter product id" class="form-control" 
+   >
+          <!--    [class.is-invalid]="prId1.invalid && prId1.touched" [class.is-valid]="prId1.valid"
+          <div class="text-danger" *ngIf="!prId1.valid && prId1.touched"> id is mandatory</div> -->
+
+           <label >Description:</label>
+      <input  formControlName="des" type="text" placeholder="enter description"  class="form-control" 
+      [class.is-invalid]="des1.invalid && des1.touched" [class.is-valid]="des1.valid">
+          <div class="text-danger" *ngIf="!des1.valid && des1.touched"> description is mandatory</div>
+
+             <label >Price:</label>
+      <input   formControlName="prc" type="text"  placeholder="enter price" class="form-control" 
+   >
+         <!--   [class.is-invalid]="prc1.invalid && prc1.touched" [class.is-valid]="prc1.valid"
+          <div class="text-danger" *ngIf="!prc1.valid && prc1.touched">enter price</div> -->
+
+            <label >Stock quantity:</label>
+      <input  formControlName="sQty" type="text" placeholder="enter your stock quantity"  class="form-control" 
+      [class.is-invalid]="sQty1.invalid && sQty1.touched" [class.is-valid]="sQty1.valid">
+          <div class="text-danger" *ngIf="!sQty1.valid && sQty1.touched"> enter quantity</div>
+
+            <label >Image:</label>
+      <input formControlName="imgName"  type="file" placeholder="enter image file name" class="form-control"  
+     > 
+     <!-- [class.is-invalid]="imgName1.invalid && imgName1.touched" [class.is-valid]="imgName1.valid" -->
+          <!-- <div class="text-danger" *ngIf="!imgName1.valid && imgName1.touched">  enter a valid image file name</div> -->
+
+            <label >Display order:</label>
+      <input  formControlName="dispOrdr" type="text"  placeholder="enter display order no:" 
+      class="form-control" >
+
+
+    <div class="form-group"> 
+        <label> Is active : </label>
+        <input    formControlName="isAct" type="radio" id="yes1" value="true" name="isAct" >
+        <label for="yes1">Yes </label>
+        <input   formControlName="isAct" type="radio" id="no1" value="false" name="isAct"  >
+        <label for="no1"> No </label> 
+    </div>
+    
+    <div class="form-group"> 
+        <label> Is featured : </label>
+        <input    formControlName="isFeat" type="radio" id="yes2" value="true" name="isFeat" >
+        <label for="yes2">Yes </label>
+        <input   formControlName="isFeat" type="radio" id="no2" value="false" name="isFeat"  >
+
+        <label for="no2"> No </label> 
+    </div>
+
+    <div class="form-group"> 
+        <label for="categ"> Category Id : </label>
+        <select   formControlName="catgId"  id="categ" name="categoryid"  class="form-control" >
+          <option selected>select</option>
+          <option *ngFor="let k of c" >{{k.categoryId}}</option>
+        </select>
+    </div>
+
+</form>
+       </div>
+<br> 
+    <!-- <div *ngIf="btnAdd.click==true">
+      <button type="button" [disabled]="myform1.invalid"  class="btn btn-primary" (click)=" addProduct(); modalRef.hide();">Add</button></div> -->
+    <!-- <div   *ngIf="btnUpdate.click==true">
+    <button type="button"  [disabled]="myform1.invalid" class="btn btn-primary" (click)=" updateprod(); modalRef.hide();">UPDATE</button></div> -->
+ <button type="button"   class="btn btn-primary" (click)=" addProduct(); modalRef.hide();">Add</button>
+<button type="button"   class="btn btn-primary" (click)=" updateprod(); modalRef.hide();">UPDATE</button>
+    <button type="button" class="btn btn-primary" (click)="modalRef.hide()"><span >Close</span></button>
+
+  </div> 
+</ng-template>
+
+
   <div class="container">
-  <br>
   <div class="album py-5 bg-light shadow-sm">
   
-
-  
-  <table class="table-bordered border-collapse col-md-12 table-striped">
+ <div class="table-responsive">
+  <table class="table table-bordered border-collapse col-md-12 table-striped ">
+  <thead>
     <tr>
       <th>ProductId</th>
       <th>CategoryId</th>
@@ -28,59 +118,83 @@
       <th>Quantity in stock</th>
        <th></th>
     </tr>
-
-   <tr *ngFor ="let res of result;let ind=index">
+</thead>
+<tbody *ngFor ="let res of result;let ind=index">
+   <tr  >
 
       <td>{{res.productId}}</td>
       <td>{{res.categoryId}}</td>
       <td>{{res.name}}</td>
       <td>{{res.unitPrice}}</td>
       <td>{{res.stockQuantity}}</td>
+        <td ><button type="button" class="btn btn-primary" (click)="collapse.show()"
+        aria-controls="collapseManual">View Details
+</button></td>
+    </tr>
+<!-- using collapse -->
+
+
+<tr  id="collapseManual" #collapse="bs-collapse" [collapse]="true">
   
-        <td><button type="button" class="btn-primary" (click)="collapse.show();"  aria-controls="collapseManual">View Details</button></td>
-<!-- 
-                                                  <td><button class="btn-primary">Delete</button></td> -->
-
-                                         
-<!--using collapse-->
-
- <div   id="collapseManual" #collapse="bs-collapse" [collapse]="true">
- <tr>
-<br>
-  <div class="well well-lg card card-block card-header">
- 
-   <div class=" row">
+   <div class="row">
 
     <div class=" col-md-4 card shadow-sm" style="align-items: center;">
-          <br><img class="bd-placeholder-img rounded-circle" width="140" height="140" src="./assets/images/kids1.jpg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title>
-</div>
+          <br><img class="bd-placeholder-img rounded-circle" src="./assets/images/{{res.fileName}}" width="140" height="140"  
+          preserveAspectRatio="xMidYMid slice" focusable="false" role="img" 
+          aria-label="Placeholder: 140x140"><title>Placeholder</title>
+    </div>
+    <div class="col-xl-4 order-md-1 card shadow-sm">
+      <br><h4>Details<br></h4>
+    <p>Description : {{res.description}}  </p>
+    </div> 
+    <div class="col-xl-4 order-md-2 card shadow-sm" style="align-content:space-around;">
+    <button aria-controls="collapseManual" type="button" class="close pull-right" aria-label="Close" 
+    (click)="collapse.hide()"> <span aria-hidden="true">&times;</span>
+      </button>  
+      <br><button style="background-color:rgb(114, 156, 144); color:rgb(65, 8, 8); " 
+      class="btn btn-success" (click)="autoPopulate(ind,res.productId); openModal(template1);">Edit</button><br>
+      <button  class="btn btn-danger">Delete</button>
+    </div>
 
-  <div class="col-xl-4 order-md-1 card shadow-sm">
-    <br><h4>Details<br></h4>
-  <p>Description :  {{res.description}} </p>
-  </div> 
-  <div class="col-xl-4 order-md-2 card shadow-sm" style="align-content:space-around;">
-   <button type="button" class="close pull-right" aria-label="Close" (click)="collapse.hide()"> 
-  <span aria-hidden="true">&times;</span>
-    </button>
-    <br><button style="background-color:rgb(114, 156, 144); color:rgb(65, 8, 8); " class="btn btn-success">Edit</button><br>
-    <button  class="btn btn-danger">Delete</button>
-  </div>
+    </div> 
 
-</div> 
-  </div>
-  </tr>
-</div> 
-
-
-    </tr>
-  </table>
+ </tr>
+   </tbody>
+  </table>   </div>                     
+   
   
-
-
-
-
 </div>
   </div>
 
 
+
+<!-- pagination -->
+    <nav aria-label="Page navigation example">
+      <ul  class="pagination justify-content-end">
+        <li class="page-item"><button  class="page-link" [disabled]="(z <=1)"  #asd  (click)="setPageNumber(z-1);">Previous</button></li>
+        <li class="page-item"><a class="page-link" (click)="setPageNumber(z);" >{{z}}</a></li>
+        <li class="page-item"><a class="page-link" (click)="setPageNumber(z+1);" >{{z+1}}</a></li>
+        <li class="page-item"><a class="page-link" (click)="setPageNumber(z+2);">{{z+2}}</a></li>
+        <li class="page-item"><button [disabled]="(z >= totalNumPages1)" class="page-link" (click)="setPageNumber(z+1);">Next</button></li>
+      </ul>
+    </nav>
+
+ <!-- <nav aria-label="Page navigation example">
+      <ul  class="pagination justify-content-end">
+        <li class="page-item"><button  class="page-link" *ngIf="z>=1" #asd 
+         (click)="setPageNumber(z-1);">Previous</button></li>
+        <li class="page-item"><a class="page-link isactive" (click)="setPageNumber(z);" >{{z}}</a></li>
+        <li class="page-item"><a class="page-link" (click)="setPageNumber(z+1);" >{{z+1}}</a></li>
+        <li class="page-item"><a class="page-link" (click)="setPageNumber(z+2);">{{z+2}}</a></li>
+        <li class="page-item"><a class="page-link" (click)="setPageNumber(z+1);">Next</a></li>
+      </ul>
+    </nav> -->
+
+    <!-- <br>
+    <ul class="nav nav-pills justify-content-end">
+      <li class="nav-item" *ngFor ="let tot of totalNumPages;let ind=index"> 
+        <a class="nav-link " (click)="setPageNumber(ind+1);" [ngClass]="{'active':(ind+1)==z}">{{ind+1}}</a>
+      </li>
+    </ul> -->
+
+   

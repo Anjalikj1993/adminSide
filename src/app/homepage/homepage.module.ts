@@ -13,6 +13,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import {TemplateRef  } from '@angular/core';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
